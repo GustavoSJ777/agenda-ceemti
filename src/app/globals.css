@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply bg-fundo font-sans text-[15px] leading-normal text-texto; }
+  :focus-visible { @apply outline outline-[3px] outline-offset-2 outline-azul-400; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-campo border border-transparent px-4 py-2 font-bold transition disabled:cursor-not-allowed disabled:opacity-60; }
+  .btn-primario { @apply bg-azul-600 text-white hover:bg-azul-700; }
+  .btn-secundario { @apply border-azul-200 bg-azul-100 text-azul-700 hover:bg-azul-200; }
+  .btn-grande { @apply w-full py-3 text-base; }
+  .card { @apply rounded-card border border-borda bg-white p-5 shadow-card; }
+  .campo { @apply flex flex-col gap-1; }
+  .campo label { @apply text-sm font-bold; }
+  .campo input, .campo select, .campo textarea { @apply rounded-campo border border-borda bg-white px-3 py-2 focus:border-azul-500; }
+  .alerta { @apply rounded-campo border px-4 py-3 text-sm; }
+  .alerta-erro { @apply border-perigo/30 bg-perigo-bg text-perigo; }
+  .alerta-sucesso { @apply border-sucesso/30 bg-sucesso-bg text-sucesso; }
+  .alerta-aviso { @apply border-aviso/30 bg-aviso-bg text-aviso; }
+  .alerta-info { @apply border-azul-200 bg-azul-100 text-azul-700; }
+}
+
+@layer components {
+  .tabela-wrap { @apply overflow-x-auto rounded-card border border-borda bg-white shadow-card; }
+  .tabela { @apply w-full border-collapse text-left text-sm; }
+  .tabela th { @apply whitespace-nowrap bg-azul-50 px-4 py-3 font-extrabold text-texto-suave; }
+  .tabela td { @apply border-t border-borda px-4 py-3 align-middle; }
+  .tabela .col-acoes { @apply whitespace-nowrap text-right; }
+  dialog { @apply text-texto; }
+  dialog::backdrop { background: rgba(27, 51, 80, .4); }
+}
+
+@media (max-width: 640px) {
+  .tabela thead { display: none; }
+  .tabela, .tabela tbody, .tabela tr, .tabela td { display: block; width: 100%; }
+  .tabela tr { border-top: 1px solid #dce9f5; padding: .5rem 0; }
+  .tabela td { border: 0; padding: .25rem 1rem; display: flex; justify-content: space-between; gap: 1rem; text-align: right; }
+  .tabela td::before { content: attr(data-label); font-weight: 800; color: #5a7088; text-align: left; }
+  .tabela td.col-acoes { justify-content: flex-end; }
+  .tabela td.col-acoes::before { content: none; }
+}
+
+@layer components {
+  .tabela-wrap { @apply overflow-x-auto rounded-card border border-borda bg-white shadow-card; }
+  .tabela { @apply w-full border-collapse text-left text-sm; }
+  .tabela th { @apply whitespace-nowrap bg-azul-50 px-4 py-3 font-extrabold text-texto-suave; }
+  .tabela td { @apply border-t border-borda px-4 py-3 align-middle; }
+  .tabela .col-acoes { @apply whitespace-nowrap text-right; }
+}
+
+@media (max-width: 640px) {
+  .tabela thead { display: none; }
+  .tabela, .tabela tbody, .tabela tr, .tabela td { display: block; width: 100%; }
+  .tabela tr { border-top: 1px solid #dce9f5; padding: .5rem 0; }
+  .tabela td { border: 0; padding: .25rem 1rem; display: flex; justify-content: space-between; gap: 1rem; text-align: right; }
+  .tabela td::before { content: attr(data-label); font-weight: 800; color: #5a7088; text-align: left; }
+  .tabela td.col-acoes { justify-content: flex-end; }
+  .tabela td.col-acoes::before { content: none; }
+}

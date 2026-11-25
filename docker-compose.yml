@@ -1,0 +1,31 @@
+# Produção/homologação local: o app em contêiner falando com o Supabase (nuvem).
+# Uso:  cp .env.example .env   (preencha)   ->   docker compose up -d --build
+services:
+  app:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+    image: agenda-ceemti:latest
+    container_name: agenda-ceemti
+    restart: unless-stopped
+    ports:
+      - "${PORTA:-3000}:3000"
+    environment:
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
+      DEBUG_TEMPOS: ${DEBUG_TEMPOS:-0}
+      # Evita a espera do IPv6 antes do IPv4 em Docker/WSL (cada conexão nova podia perder ~250 ms).
+      NODE_OPTIONS: --dns-result-order=ipv4first --no-network-family-autoselection
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/.next/cache
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
